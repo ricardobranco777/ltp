@@ -298,6 +298,8 @@ AC_CHECK_TYPES([struct sockaddr_vm],,,[
 
 AC_CHECK_TYPES([struct uffdio_move],,,[#include <linux/userfaultfd.h>])
 AC_CHECK_TYPES([struct uffdio_poison],,,[#include <linux/userfaultfd.h>])
+AC_CHECK_TYPES([struct uffdio_rwprotect],,,[#include <linux/userfaultfd.h>])
+AC_CHECK_TYPES([struct uffdio_set_mode],,,[#include <linux/userfaultfd.h>])
 AC_CHECK_TYPES([struct uffdio_writeprotect],,,[#include <linux/userfaultfd.h>])
 
 AC_CHECK_TYPES([struct keyctl_dh_params, struct keyctl_kdf_params,
