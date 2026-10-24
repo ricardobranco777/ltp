@@ -247,6 +247,34 @@ struct uffdio_poison {
 };
 #endif	/* HAVE_STRUCT_UFFDIO_POISON */
 
+#ifndef HAVE_STRUCT_UFFDIO_RWPROTECT
+#define UFFD_FEATURE_RWP			(1<<17)
+#define UFFD_FEATURE_RWP_ASYNC			(1<<18)
+#define UFFD_PAGEFAULT_FLAG_RWP			(1<<3)
+#define UFFDIO_REGISTER_MODE_RWP		((__u64)1<<3)
+#define _UFFDIO_RWPROTECT			(0x09)
+#define UFFDIO_RWPROTECT	_IOWR(UFFDIO, _UFFDIO_RWPROTECT, \
+				      struct uffdio_rwprotect)
+
+struct uffdio_rwprotect {
+	struct uffdio_range range;
+#define UFFDIO_RWPROTECT_MODE_RWP		((__u64)1<<0)
+#define UFFDIO_RWPROTECT_MODE_DONTWAKE		((__u64)1<<1)
+	__u64 mode;
+};
+#endif	/* HAVE_STRUCT_UFFDIO_RWPROTECT */
+
+#ifndef HAVE_STRUCT_UFFDIO_SET_MODE
+#define _UFFDIO_SET_MODE			(0x0A)
+#define UFFDIO_SET_MODE	_IOW(UFFDIO, _UFFDIO_SET_MODE, \
+				     struct uffdio_set_mode)
+
+struct uffdio_set_mode {
+	__u64 enable;
+	__u64 disable;
+};
+#endif	/* HAVE_STRUCT_UFFDIO_SET_MODE */
+
 #define SAFE_USERFAULTFD(flags, retry) \
 	safe_userfaultfd(__FILE__, __LINE__, (flags), (retry))
 
